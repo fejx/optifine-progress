@@ -1,5 +1,15 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+    }
+}
+
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.2.60'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
 }
 
 group 'fejx'
@@ -33,9 +43,5 @@ compileTestKotlin {
 jar {
     manifest {
         attributes 'Main-Class': 'fejx.optifineProgress.MainKt'
-    }
-
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
