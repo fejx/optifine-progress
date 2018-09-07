@@ -1,7 +1,7 @@
 package fejx.optifineProgress.page
 
 class OptifineProgressExtractor : ProgressExtractor {
-	private val regex = """Update to Minecraft 1\.13: (\d{1,3})%""".toRegex()
+	private val regex = """Update to Minecraft [0-9.]+: (\d{1,3})%""".toRegex()
 
 	override fun extract(pageLines: Sequence<String>): Int? {
 		pageLines.forEach {

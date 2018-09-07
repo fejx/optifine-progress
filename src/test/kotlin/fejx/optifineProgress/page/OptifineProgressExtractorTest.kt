@@ -29,13 +29,13 @@ internal class OptifineProgressExtractorTest {
 
 	@Test
 	fun twoDigitSequence() {
-		val sequence = sequenceOf("some text", "<b>Update to Minecraft 1.13: 40%</b>")
+		val sequence = sequenceOf("some text", "<b>Update to Minecraft 1.10.2: 40%</b>")
 		assertEquals(40, progressExtractor.extract(sequence))
 	}
 
 	@Test
 	fun threeDigitSequence() {
-		val sequence = sequenceOf("some text", "<b>Update to Minecraft 1.13: 100%</b>")
+		val sequence = sequenceOf("some text", "<b>Update to Minecraft 1.13.1: 100%</b>")
 		assertEquals(100, progressExtractor.extract(sequence))
 	}
 
@@ -94,7 +94,7 @@ val realSequence = sequenceOf(
 		""" target="_blank">translation</a>""",
 		"""      <a href="https://github.com/sp614x/optifine/tree/master/OptiFineDoc/doc" target="_blank">documentation</a>,""",
 		"""      <a href="https://github.com/sp614x/optifine/issues" target="_blank">issue tracker</a>.</p>""",
-		"""    <p><b>Update to Minecraft 1.13: 26%</b> (merging OptiFine changes)</p>""",
+		"""    <p><b>Update to Minecraft 1.13.1: 26%</b> (merging OptiFine changes)</p>""",
 		"""""",
 		"""              <!-- End of content -->""",
 		"""        </td>""",
