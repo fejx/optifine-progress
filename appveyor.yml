@@ -1,0 +1,26 @@
+shallow_clone: true
+environment:
+  JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+build_script:
+- cmd: gradlew shadowJar --no-daemon
+test_script:
+- cmd: gradlew check --no-daemon
+on_success:
+- cmd: if exist "%USERPROFILE%\.gradle\caches\modules-2\modules-2.lock" del /Q "%USERPROFILE%\.gradle\caches\modules-2\modules-2.lock"
+- cmd: for /D %%d in ("%USERPROFILE%\.gradle\caches\*") do if exist "%%d\plugin-resolution" rmdir /S /Q "%%d\plugin-resolution"
+artifacts:
+- path: build/libs/optifine-progress*.jar
+  name: mainJar
+deploy:
+# Deploy release when a tag is pushed
+- description: 'Release $(APPVEYOR_REPO_TAG_NAME)'
+  provider: GitHub
+  auth_token:
+    secure: MVbX3J3klWIuu1xEFNosBORplXGdPsedwpI10dqab/M6zdw5+fHJr78KD9O1jK/9
+  artifact: mainJar
+  on:
+    branch: master
+    appveyor_repo_tag: true
+cache:
+- '%USERPROFILE%\.gradle\caches -> build.gradle.kts'
+- '%USERPROFILE%\.gradle\wrapper -> gradle\wrapper\gradle-wrapper.properties'
